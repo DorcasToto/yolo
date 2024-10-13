@@ -1,4 +1,4 @@
-## 1. Choice of Base Image
+<!-- ## 1. Choice of Base Image
  The base image used to build the containers is `node:16-alpine3.16`. It is derived from the Alpine Linux distribution, making it lightweight and compact. 
  Used 
  1. Client:`node:16-alpine3.16`
@@ -167,4 +167,42 @@ To achieve the task the following git workflow was used:
 `docker compose up`
 
 13. Created explanation.md file and modified it as the commit messages in the repo will explain.
+ -->
+# Project EXPLANATION
 
+## Choice of Base Image
+
+For this project, we use the following base images:
+
+- **Node.js 16 (Alpine)**: Chosen for both the frontend and backend to ensure a lightweight, secure, and efficient environment for running Node.js applications. The Alpine variant minimizes the size of the image, leading to faster builds and less disk space usage.
+
+- **Nginx (Alpine)**: Used as a lightweight web server for serving the built frontend application. Nginx is known for its performance and efficiency in serving static files.
+
+- **MongoDB 4.4**: A widely used NoSQL database, chosen for its scalability and flexibility in handling unstructured data.
+
+## Dockerfile Directives
+
+### Client Dockerfile
+
+The client Dockerfile is responsible for building the React frontend application.
+
+```dockerfile
+FROM node:16-alpine AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
