@@ -18,11 +18,9 @@ services:
       - "5000:5000"
     depends_on:
       - mongo
-    environment:
-      MONGO_URL: mongodb://mongo:27017/mydatabase
 
   mongo:
-    image: mongo:7.0.4
+    image: mongo:4.4
     ports:
       - "27017:27017"
     volumes:
