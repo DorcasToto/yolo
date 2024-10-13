@@ -1,13 +1,19 @@
 services:
-  client:
-    build: ./client
+  frontend:
+    image: dorcas/react_frontend:v1.0.0
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - backend
 
   backend:
-    build: ./backend
+    image: dorcas/express_backend:v1.0.0
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     depends_on:
@@ -16,7 +22,7 @@ services:
       MONGO_URL: mongodb://mongo:27017/mydatabase
 
   mongo:
-    image: mongo:4.4
+    image: mongo:7.0.4
     ports:
       - "27017:27017"
     volumes:
