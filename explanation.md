@@ -122,6 +122,45 @@ volumes:
 
 This volume is mapped to `/data/db` in the MongoDB container, which is where MongoDB stores its data.
 
+## Docker Compose Image Tagging
+
+In the Docker Compose file, images for the frontend and backend services are tagged with version numbers to manage different versions effectively.
+
+```yaml
+services:
+  frontend:
+    image: dorcas/react_frontend:v1.0.0
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  backend:
+    image: dorcas/express_backend:v1.0.0
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    networks:
+      - app_network
+```
+
+The version tags (e.g., `v1.0.0`) help identify which version of the images is in use, facilitating easier updates and rollbacks.
+
+## Screenshot
+
+Here is a screenshot of the Docker setup:
+
+![Docker Deployed Images](dockerImage.png)
+
 ## Git Workflow
 
 To manage the project's version control, follow this Git workflow:
