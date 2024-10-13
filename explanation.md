@@ -62,3 +62,39 @@ CMD ["nginx", "-g", "daemon off;"]
 
 - **CMD ["nginx", "-g", "daemon off;"]**: Starts Nginx in the foreground, which is necessary for the container to keep running.
 
+### Backend Dockerfile
+
+The backend Dockerfile is responsible for running the Node.js Express application. Here’s a detailed breakdown:
+
+```dockerfile
+FROM node:16-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["npm", "start"]
+```
+
+#### Explanation of Directives:
+
+- **FROM node:16-alpine**: Specifies the base image for the backend container, utilizing the same lightweight Node.js environment as the client to maintain consistency.
+
+- **WORKDIR /app**: Sets the working directory to `/app`, similar to the frontend Dockerfile, ensuring that all commands are executed in the same context.
+
+- **COPY package*.json ./**: Copies the `package.json` and `package-lock.json` files, allowing for dependency installation.
+
+- **RUN npm install**: Installs all the necessary dependencies listed in `package.json`, ensuring the application has everything it needs to run.
+
+- **COPY . .**: Copies the remaining application files from the local directory to the container. This includes all the server code and configuration files.
+
+- **EXPOSE 5000**: Informs Docker that the backend application will be accessible through port 5000.
+
+- **CMD ["npm", "start"]**: Executes the command to start the Express server, launching the backend application.
+
