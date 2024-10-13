@@ -98,3 +98,58 @@ CMD ["npm", "start"]
 
 - **CMD ["npm", "start"]**: Executes the command to start the Express server, launching the backend application.
 
+## Docker Compose Networking
+
+In the provided Docker Compose file, we define a custom network named `my_app_network` using the bridge driver. This enables seamless communication between the frontend, backend, and MongoDB containers.
+
+```yaml
+networks:
+  app_network:
+    driver: bridge
+    name: my_app_network
+```
+
+By specifying `depends_on`, we ensure that the containers are started in the correct order. The frontend depends on the backend, and the backend depends on MongoDB.
+
+## Docker Compose Volume Definition and Usage
+
+A volume named `mongo-data` is defined to persist data for the MongoDB container. This ensures that data remains intact even if the container is stopped or recreated.
+
+```yaml
+volumes:
+  mongo-data:
+```
+
+This volume is mapped to `/data/db` in the MongoDB container, which is where MongoDB stores its data.
+
+## Git Workflow
+
+To manage the project's version control, follow this Git workflow:
+
+1. **Create a Feature Branch**: When starting a new feature or bug fix, create a new branch from `main`.
+   ```bash
+   git checkout -b feature/my-new-feature
+   ```
+
+2. **Make Changes**: Implement your changes, making sure to test locally with Docker.
+
+3. **Commit Changes**: After completing your changes, commit them with a meaningful message.
+   ```bash
+   git add .
+   git commit -m "Add my new feature"
+   ```
+
+4. **Push to Remote**: Push your branch to the remote repository.
+   ```bash
+   git push origin feature/my-new-feature
+   ```
+
+5. **Open a Pull Request**: Once pushed, create a pull request (PR) to merge your changes into `main`.
+
+6. **Review and Merge**: After reviewing, merge the PR into the main branch.
+
+7. **Clean Up**: After merging, delete your feature branch.
+   ```bash
+   git branch -d feature/my-new-feature
+   ```
+
