@@ -74,4 +74,12 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  config.vm.network "forwarded_port", guest: 80, host: 8080  # Frontend
+  config.vm.network "forwarded_port", guest: 5000, host: 5000 # Backend
+
+  # Provisioning with shell
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update
+    sudo apt-get install -y ansible
+  SHELL
 end
