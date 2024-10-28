@@ -120,8 +120,6 @@ The project is structured into roles that encapsulate specific tasks:
 ### Files and Configuration
 
 - **docker-compose.yml**: This file defines the services, networks, and volumes for the application.
-- **deployment YAML files**: These files contain Kubernetes configurations for deploying the application in a container orchestration environment.
-- **get-docker.sh**: A script to install Docker and configure it on the VM automatically.
 
 ## Key Features
 
