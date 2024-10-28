@@ -23,13 +23,13 @@
     name: mongo
     image: mongo:4.4
     state: started
-    restart_policy: always  # Ensure the container restarts automatically
+    restart_policy: always 
     ports:
       - "27017:27017" 
     volumes:
       - mongo-data:/data/db  
     networks:
-      - name: app_network  # Make sure to specify the network name correctly
+      - name: app_network 
 
 
 
