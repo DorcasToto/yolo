@@ -23,32 +23,46 @@ This project involves setting up an e-commerce web application that acts as a da
 The repository includes the following key components:
 
 ```
+├── .vagrant
+├── .vscode
+├── backend
+├── client
+├── roles
+├── .dockerignore
+├── .gitignore
+├── README.md
 ├── Vagrantfile
 ├── ansible.cfg
-├── main.yml
-├── roles
-│   ├── frontend
-│   ├── backend
-│   └── common
-├── inventory
 ├── docker-compose.yml
-├── backend-deployment.yaml
-├── frontend-deployment.yaml
+├── dockerImage.png
+├── explanation.md
 ├── get-docker.sh
-├── .gitignore
-└── README.md
+├── hosts
+├── inventory
+├── main.yml
+├── package-lock.json
+└── package.json
 ```
 
+- **.vagrant/**: Contains files related to Vagrant's management of the virtual environment.
+- **.vscode/**: Configuration files for Visual Studio Code.
+- **backend/**: Directory for the backend service components of the application.
+- **client/**: Directory for the client-side components of the application.
+- **roles/**: Contains subdirectories for different roles that define specific tasks.
+- **.dockerignore**: Lists files and directories that should be ignored by Docker.
+- **.gitignore**: Lists files and directories that should be ignored by Git.
+- **README.md**: Documentation for the project.
 - **Vagrantfile**: Configuration for the Vagrant virtual machine.
 - **ansible.cfg**: Ansible configuration settings.
-- **main.yml**: The main Ansible playbook for automating the setup.
-- **roles/**: Contains subdirectories for different roles (frontend, backend, common) that define specific tasks.
-- **inventory**: Defines the hosts and groups for the Ansible playbook.
 - **docker-compose.yml**: Configuration for Docker container orchestration.
-- **backend-deployment.yaml**: Deployment configurations for the backend service.
-- **frontend-deployment.yaml**: Deployment configurations for the frontend service.
+- **dockerImage.png**: Screenshot of the Docker image.
+- **explanation.md**: Additional explanation of the project components or setup.
 - **get-docker.sh**: Script for installing Docker on the VM.
-- **.gitignore**: Lists files and directories that should be ignored by Git.
+- **hosts**: Initial commit for IP3, defining the hosts and groups for Ansible.
+- **inventory**: Defines the hosts and groups for the Ansible playbook.
+- **main.yml**: The main Ansible playbook for automating the setup.
+- **package-lock.json**: Lock file for npm dependencies.
+- **package.json**: Configuration for npm, including scripts and dependencies.
 
 ## Getting Started
 
@@ -106,7 +120,7 @@ The project is structured into roles that encapsulate specific tasks:
 ### Files and Configuration
 
 - **docker-compose.yml**: This file defines the services, networks, and volumes for the application.
-- **deployment YAML files**: These files (`backend-deployment.yaml`, `frontend-deployment.yaml`) contain Kubernetes configurations for deploying the application in a container orchestration environment.
+- **deployment YAML files**: These files contain Kubernetes configurations for deploying the application in a container orchestration environment.
 - **get-docker.sh**: A script to install Docker and configure it on the VM automatically.
 
 ## Key Features
@@ -126,6 +140,9 @@ http://<vagrant_ip>:<port>
 
 - Replace `<vagrant_ip>` with the IP address assigned to your Vagrant VM (usually `192.168.33.10`).
 - Replace `<port>` with the port number configured in your Docker setup (commonly `80` for HTTP).
+
+## Screenshot
+![Docker Hub Images](image.png)
 
 ## Conclusion
 
