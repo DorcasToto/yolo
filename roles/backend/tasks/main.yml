@@ -1,4 +1,11 @@
-# backend/tasks/main.yml
+# roles/backend/tasks/main.yml
+- name: Clone backend repository
+  git:
+    repo: "{{ backend_repo }}"
+    dest: "{{ app_directory }}/{{ backend_subdir }}"
+    version: "{{ backend_branch }}"
+    force: yes
+
 - name: Build and run backend container
   docker_container:
     name: "{{ backend_container_name }}"
@@ -6,3 +13,8 @@
     state: started
     ports:
       - "{{ backend_port }}"
+    working_dir: "{{ app_directory }}/{{ backend_subdir }}"
+    volumes:
+      - "{{ app_directory }}/{{ backend_subdir }}:/app"
+    networks:
+      - name: "{{ app_network_name }}"

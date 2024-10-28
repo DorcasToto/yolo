@@ -1,10 +1,11 @@
-
-- name: Setup application
+# main.yml
+- name: Setup Application Environment
   hosts: all
   become: yes
   vars_files:
     - vars.yml
   roles:
-    - mongo
-    - backend
-    - frontend
+    - common     
+    - mongo       
+    - backend     
+    - frontend    

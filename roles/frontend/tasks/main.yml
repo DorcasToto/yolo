@@ -1,4 +1,11 @@
-# frontend/tasks/main.yml
+
+- name: Clone frontend repository
+  git:
+    repo: "{{ frontend_repo }}"
+    dest: "{{ app_directory }}/{{ frontend_subdir }}"
+    version: "{{ frontend_branch }}"
+    force: yes
+
 - name: Build and run frontend container
   docker_container:
     name: "{{ frontend_container_name }}"
@@ -6,3 +13,8 @@
     state: started
     ports:
       - "{{ frontend_port }}"
+    working_dir: "{{ app_directory }}/{{ frontend_subdir }}"
+    volumes:
+      - "{{ app_directory }}/{{ frontend_subdir }}:/app"
+    networks:
+      - name: "{{ app_network_name }}"

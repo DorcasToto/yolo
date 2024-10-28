@@ -1,20 +1,10 @@
-# mongo/tasks/main.yml
+
 - name: Create Docker network for application
   docker_network:
     name: "{{ app_network_name }}"
     state: present
 
-- name: Stop existing MongoDB container if it exists
-  docker_container:
-    name: "{{ mongo_container_name }}"
-    state: stopped
-
-- name: Remove existing MongoDB container if it exists
-  docker_container:
-    name: "{{ mongo_container_name }}"
-    state: absent
-
-- name: Create docker volumes for MongoDB
+- name: Create docker volume for MongoDB
   docker_volume:
     name: "{{ mongo_volume }}"
     state: present
