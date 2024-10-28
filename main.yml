@@ -1,31 +1,29 @@
+---
 - name: Initial Setup for Docker Project
   hosts: all
-  become: true
+  become: yes
   tasks:
-    - name: Update and upgrade apt packages
+    - name: Ensure Docker is installed
       apt:
-        update_cache: yes
-        upgrade: dist
-    - name: Install prerequisites for Docker
-      apt:
-        name: 
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - software-properties-common
+        name: docker.io
         state: present
 
-    - name: Add Docker’s official GPG key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
+    - name: Ensure Docker Python module is installed
+      pip:
+        name: docker
         state: present
 
-    - name: Add Docker repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
-        state: present
+- name: Setup MongoDB
+  hosts: all
+  roles:
+    - mongo 
 
-    - name: Install Docker
-      apt:
-        name: docker-ce
-        state: present
+- name: Setup Backend
+  hosts: all
+  roles:
+    - backend  
+
+- name: Setup Frontend
+  hosts: all
+  roles:
+    - frontend 

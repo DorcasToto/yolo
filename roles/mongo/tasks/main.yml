@@ -1,0 +1,16 @@
+- name: Create docker volumes for MongoDB
+  docker_volume:
+    name: mongo-data
+    state: present
+
+- name: Run MongoDB container
+  docker_container:
+    name: mongo
+    image: mongo:4.4
+    state: started
+    ports:
+      - "27017:27017" 
+    volumes:
+      - mongo-data:/data/db  
+    networks:
+      - app_network

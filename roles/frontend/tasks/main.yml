@@ -1,4 +1,3 @@
----
 - name: Build and run frontend container
   docker_container:
     name: frontend
