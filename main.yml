@@ -1,20 +1,7 @@
----
-- name: Initial Setup for Docker Project
-  hosts: all
-  become: yes
-  tasks:
-    - name: Ensure Docker is installed
-      apt:
-        name: docker.io
-        state: present
-
-    - name: Ensure Docker Python module is installed
-      pip:
-        name: docker
-        state: present
 
 - name: Setup MongoDB
   hosts: all
+  become: yes
   roles:
     - mongo 
 
@@ -26,4 +13,4 @@
 - name: Setup Frontend
   hosts: all
   roles:
-    - frontend 
+    - frontend  

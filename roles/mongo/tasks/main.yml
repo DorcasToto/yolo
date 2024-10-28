@@ -1,3 +1,18 @@
+- name: Create Docker network for application
+  docker_network:
+    name: app_network
+    state: present
+
+- name: Stop existing MongoDB container if it exists
+  docker_container:
+    name: mongo
+    state: stopped
+
+- name: Remove existing MongoDB container if it exists
+  docker_container:
+    name: mongo
+    state: absent
+
 - name: Create docker volumes for MongoDB
   docker_volume:
     name: mongo-data
@@ -8,9 +23,13 @@
     name: mongo
     image: mongo:4.4
     state: started
+    restart_policy: always  # Ensure the container restarts automatically
     ports:
       - "27017:27017" 
     volumes:
       - mongo-data:/data/db  
     networks:
-      - app_network
+      - name: app_network  # Make sure to specify the network name correctly
+
+
+
