@@ -1,0 +1,8 @@
+---
+- name: Build and run frontend container
+  docker_container:
+    name: frontend
+    image: dorcas/react_frontend:v1.0.0
+    state: started
+    ports:
+      - "8080:80"

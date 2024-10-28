@@ -1,0 +1,8 @@
+---
+- name: Build and run backend container
+  docker_container:
+    name: backend
+    image: dorcas/express_backend:v1.0.0
+    state: started
+    ports:
+      - "5000:5000"
