@@ -1,35 +1,33 @@
+# mongo/tasks/main.yml
 - name: Create Docker network for application
   docker_network:
-    name: app_network
+    name: "{{ app_network_name }}"
     state: present
 
 - name: Stop existing MongoDB container if it exists
   docker_container:
-    name: mongo
+    name: "{{ mongo_container_name }}"
     state: stopped
 
 - name: Remove existing MongoDB container if it exists
   docker_container:
-    name: mongo
+    name: "{{ mongo_container_name }}"
     state: absent
 
 - name: Create docker volumes for MongoDB
   docker_volume:
-    name: mongo-data
+    name: "{{ mongo_volume }}"
     state: present
 
 - name: Run MongoDB container
   docker_container:
-    name: mongo
-    image: mongo:4.4
+    name: "{{ mongo_container_name }}"
+    image: "{{ mongo_image }}"
     state: started
-    restart_policy: always 
+    restart_policy: always
     ports:
-      - "27017:27017" 
+      - "{{ mongo_port }}"
     volumes:
-      - mongo-data:/data/db  
+      - "{{ mongo_volume }}:/data/db"
     networks:
-      - name: app_network 
-
-
-
+      - name: "{{ app_network_name }}"

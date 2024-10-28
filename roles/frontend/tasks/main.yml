@@ -1,7 +1,8 @@
+# frontend/tasks/main.yml
 - name: Build and run frontend container
   docker_container:
-    name: frontend
-    image: dorcasmosonik/react_frontend:v1.0.0
+    name: "{{ frontend_container_name }}"
+    image: "{{ frontend_image }}"
     state: started
     ports:
-      - "8080:80"
+      - "{{ frontend_port }}"

@@ -1,8 +1,8 @@
+# backend/tasks/main.yml
 - name: Build and run backend container
   docker_container:
-    name: backend
-    image: dorcasmosonik/express_backend:v1.0.0
+    name: "{{ backend_container_name }}"
+    image: "{{ backend_image }}"
     state: started
     ports:
-      - "5000:5000"
-
+      - "{{ backend_port }}"
