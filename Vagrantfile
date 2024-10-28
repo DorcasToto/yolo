@@ -38,6 +38,7 @@ Vagrant.configure("2") do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
+  config.vm.synced_folder ".", "/vagrant"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -75,7 +76,8 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   config.vm.network "forwarded_port", guest: 80, host: 8080  # Frontend
-  config.vm.network "forwarded_port", guest: 5000, host: 5000 # Backend
+  config.vm.network "forwarded_port", guest: 5000, host: 1234 # Backend
+
 
   # Provisioning with shell
   config.vm.provision "shell", inline: <<-SHELL

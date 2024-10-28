@@ -1,0 +1,8 @@
+- name: Initial Setup for Docker Project
+  hosts: all
+  become: true
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
