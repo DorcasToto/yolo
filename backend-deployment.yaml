@@ -21,6 +21,13 @@ spec:
           env:
             - name: MONGO_URL
               value: "mongodb://mongo:27017/yolomy"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
