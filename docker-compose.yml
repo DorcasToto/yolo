@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: dorcas/react_frontend:v1.0.0
+    image: dorcasmosonik/react_frontend:v1.0.0
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
       - app_network
 
   backend:
-    image: dorcas/express_backend:v1.0.0
+    image: dorcasmosonik/express_backend:v1.0.0
     build:
       context: ./backend
       dockerfile: Dockerfile
